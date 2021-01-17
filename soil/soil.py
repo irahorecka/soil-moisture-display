@@ -59,4 +59,3 @@ class Soil(RPi_3BP):
         self.registered_gpio = [
             gpio for gpio, name in self.gpio_name_pair.items() if name
         ]
-        self.setup()

@@ -7,9 +7,9 @@ plant_map = {
     19: "Variegated pathos",
     20: "Yale House plant",
     21: "Money plant",
-    26: "Velvet plant",
 }
 my_plants = Soil(plant_map)
+my_plants[26] = "Velvet plant"
 my_plants.setup()
 
 while True:
