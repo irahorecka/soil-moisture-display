@@ -29,7 +29,7 @@ class Soil(RPi_3BP):
 
     def __delitem__(self, gpio_pin):
         if isinstance(gpio_pin, int) and self.gpio_name_pair.get(gpio_pin):
-            del self.gpio_name_pair[gpio_pin]
+            self.gpio_name_pair[gpio_pin] = ""
             self._set_registered_gpio()
 
     def __getitem__(self, gpio_pin):

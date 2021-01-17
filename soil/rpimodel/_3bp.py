@@ -52,68 +52,68 @@ class RPi_3BP:
 
     def _callback_4(self, channel):
         if GPIO.input(channel) or not GPIO.input(channel):
-            print(f"{self.gpio_name_pair[4]} is fine.")
+            print(f"{self.gpio_name_pair[4]} is watered.")
 
     def _callback_5(self, channel):
         if GPIO.input(channel) or not GPIO.input(channel):
-            print(f"{self.gpio_name_pair[5]} is fine.")
+            print(f"{self.gpio_name_pair[5]} is watered.")
 
     def _callback_6(self, channel):
         if GPIO.input(channel) or not GPIO.input(channel):
-            print(f"{self.gpio_name_pair[6]} is fine.")
+            print(f"{self.gpio_name_pair[6]} is watered.")
 
     def _callback_12(self, channel):
         if GPIO.input(channel) or not GPIO.input(channel):
-            print(f"{self.gpio_name_pair[12]} is fine.")
+            print(f"{self.gpio_name_pair[12]} is watered.")
 
     def _callback_13(self, channel):
         if GPIO.input(channel) or not GPIO.input(channel):
-            print(f"{self.gpio_name_pair[13]} is fine.")
+            print(f"{self.gpio_name_pair[13]} is watered.")
 
     def _callback_16(self, channel):
         if GPIO.input(channel) or not GPIO.input(channel):
-            print(f"{self.gpio_name_pair[16]} is fine.")
+            print(f"{self.gpio_name_pair[16]} is watered.")
 
     def _callback_17(self, channel):
         if GPIO.input(channel) or not GPIO.input(channel):
-            print(f"{self.gpio_name_pair[17]} is fine.")
+            print(f"{self.gpio_name_pair[17]} is watered.")
 
     def _callback_18(self, channel):
         if GPIO.input(channel) or not GPIO.input(channel):
-            print(f"{self.gpio_name_pair[18]} is fine.")
+            print(f"{self.gpio_name_pair[18]} is watered.")
 
     def _callback_19(self, channel):
         if GPIO.input(channel) or not GPIO.input(channel):
-            print(f"{self.gpio_name_pair[19]} is fine.")
+            print(f"{self.gpio_name_pair[19]} is watered.")
 
     def _callback_20(self, channel):
         if GPIO.input(channel) or not GPIO.input(channel):
-            print(f"{self.gpio_name_pair[20]} is fine.")
+            print(f"{self.gpio_name_pair[20]} is watered.")
 
     def _callback_21(self, channel):
         if GPIO.input(channel) or not GPIO.input(channel):
-            print(f"{self.gpio_name_pair[21]} is fine.")
+            print(f"{self.gpio_name_pair[21]} is watered.")
 
     def _callback_22(self, channel):
         if GPIO.input(channel) or not GPIO.input(channel):
-            print(f"{self.gpio_name_pair[22]} is fine.")
+            print(f"{self.gpio_name_pair[22]} is watered.")
 
     def _callback_23(self, channel):
         if GPIO.input(channel) or not GPIO.input(channel):
-            print(f"{self.gpio_name_pair[23]} is fine.")
+            print(f"{self.gpio_name_pair[23]} is watered.")
 
     def _callback_24(self, channel):
         if GPIO.input(channel) or not GPIO.input(channel):
-            print(f"{self.gpio_name_pair[24]} is fine.")
+            print(f"{self.gpio_name_pair[24]} is watered.")
 
     def _callback_25(self, channel):
         if GPIO.input(channel) or not GPIO.input(channel):
-            print(f"{self.gpio_name_pair[25]} is fine.")
+            print(f"{self.gpio_name_pair[25]} is watered.")
 
     def _callback_26(self, channel):
         if GPIO.input(channel) or not GPIO.input(channel):
-            print(f"{self.gpio_name_pair[26]} is fine.")
+            print(f"{self.gpio_name_pair[26]} is watered.")
 
     def _callback_27(self, channel):
         if GPIO.input(channel) or not GPIO.input(channel):
-            print(f"{self.gpio_name_pair[27]} is fine.")
+            print(f"{self.gpio_name_pair[27]} is watered.")
