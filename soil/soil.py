@@ -14,22 +14,23 @@ class Soil(RPi_3BP):
         super().__init__()
         if not isinstance(gpio_map, dict):
             raise TypeError("Expected <dict> argument.")
-        for gpio_pin, plant in gpio_map.items():
+        for gpio_pin in gpio_map:
             if gpio_pin not in self.gpio_name_pair:
                 raise KeyError(
                     f"{gpio_pin} is not a valid GPIO pin in Raspberry Pi model {self.pi_model}."
                 )
             self.gpio_name_pair[gpio_pin] = gpio_map[gpio_pin]
-
-        self.registered_gpio = [gpio_pin for gpio_pin in gpio_map]
+        self._set_registered_gpio()
 
     def __setitem__(self, gpio_pin, name):
         if isinstance(gpio_pin, int) and gpio_pin in self.callback:
             self.gpio_name_pair[gpio_pin] = name
+            self._set_registered_gpio()
 
     def __delitem__(self, gpio_pin):
         if isinstance(gpio_pin, int) and self.gpio_name_pair.get(gpio_pin):
             del self.gpio_name_pair[gpio_pin]
+            self._set_registered_gpio()
 
     def __getitem__(self, gpio_pin):
         return self.gpio_name_pair.get(gpio_pin)
@@ -54,5 +55,7 @@ class Soil(RPi_3BP):
 
     def _add_event_callback(self):
         for gpio_pin in self.registered_gpio:
-            print(gpio_pin)
             GPIO.add_event_callback(gpio_pin, self.callback[gpio_pin])
+
+    def _set_registered_gpio(self):
+        self.registered_gpio = [gpio for gpio in self.gpio_name_pair if gpio]

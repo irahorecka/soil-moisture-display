@@ -1,6 +1,7 @@
 from soil import Soil
 import time
 
+# gpio pin: plant name
 plant_map = {
     20: "Coffee plant",
     21: "Palm tree",
