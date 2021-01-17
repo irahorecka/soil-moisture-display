@@ -8,6 +8,8 @@ else:
 
 
 class RPi_3BP:
+    pi_model = "3B+"
+
     def __init__(self):
         self.gpio_name_pair = {
             4: "",

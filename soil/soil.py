@@ -17,7 +17,7 @@ class Soil(RPi_3BP):
         for gpio_pin, plant in gpio_mapping.items():
             if gpio_pin not in self.gpio_name_pair:
                 raise KeyError(
-                    f"{gpio_pin} is not a valid GPIO pin in Raspberry Pi model 3B+."
+                    f"{gpio_pin} is not a valid GPIO pin in Raspberry Pi model {self.pi_model}."
                 )
             self.gpio_name_pair[gpio_pin] = gpio_mapping[gpio_pin]
 
