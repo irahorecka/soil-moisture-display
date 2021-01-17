@@ -58,4 +58,6 @@ class Soil(RPi_3BP):
             GPIO.add_event_callback(gpio_pin, self.callback[gpio_pin])
 
     def _set_registered_gpio(self):
-        self.registered_gpio = [gpio for gpio in self.gpio_name_pair if gpio]
+        self.registered_gpio = [
+            gpio for gpio, name in self.gpio_name_pair.items() if name
+        ]
