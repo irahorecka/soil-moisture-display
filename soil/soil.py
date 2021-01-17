@@ -32,10 +32,10 @@ class Soil(RPi_3BP):
     def __getitem__(self, gpio_pin):
         return self.gpio_name_pair.get(gpio_pin)
 
-    def setup(self, bouncetime=100):
+    def setup(self):
         self._setmode_gpio()
         self._setup_gpio_in()
-        self._add_event_detect(bouncetime=bouncetime)
+        self._add_event_detect()
         self._add_event_callback()
 
     @staticmethod
@@ -46,9 +46,9 @@ class Soil(RPi_3BP):
         for key in self.gpio_name_pair:
             GPIO.setup(key, GPIO.IN)
 
-    def _add_event_detect(self, bouncetime):
+    def _add_event_detect(self):
         for key in self.gpio_name_pair:
-            GPIO.add_event_detect(key, GPIO.BOTH, bouncetime=bouncetime)
+            GPIO.add_event_detect(key, GPIO.BOTH, bouncetime=300)
 
     def _add_event_callback(self):
         for gpio_pin in self.gpio_name_pair:
