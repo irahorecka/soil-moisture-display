@@ -10,6 +10,8 @@ else:
 
 class Soil(RPi_3BP):
     # cannot inherit GPIO, as it is a class instance
+    GPIO.setmode(GPIO.BCM)
+
     def __init__(self, gpio_map):
         super().__init__()
         if not isinstance(gpio_map, dict):
@@ -30,14 +32,9 @@ class Soil(RPi_3BP):
         return self.gpio_name_pair.get(gpio_pin)
 
     def setup(self):
-        self._setmode_gpio()
         self._setup_gpio_in()
         self._add_event_detect()
         self._add_event_callback()
-
-    @staticmethod
-    def _setmode_gpio():
-        GPIO.setmode(GPIO.BCM)
 
     def _setup_gpio_in(self):
         for gpio_pin in self.registered_gpio:
@@ -62,3 +59,4 @@ class Soil(RPi_3BP):
         self.registered_gpio = [
             gpio for gpio, name in self.gpio_name_pair.items() if name
         ]
+        self.setup()
