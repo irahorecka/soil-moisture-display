@@ -9,52 +9,73 @@ else:
 
 
 class Soil(RPi_3BP):
-    # cannot inherit GPIO, as it is a class instance
-    GPIO.setmode(GPIO.BCM)
+    """ Simple API to hook up and detect soil moisture hardware to your
+    Raspberry Pi. """
 
     def __init__(self, gpio_map):
+        GPIO.setmode(GPIO.BCM)
         super().__init__()
         if not isinstance(gpio_map, dict):
             raise TypeError("Expected <dict> argument.")
         self._register_gpio(gpio_map)
 
-    def __setitem__(self, gpio_pin, name):
-        if isinstance(gpio_pin, int) and gpio_pin in self.callback:
-            self.gpio_name_pair[gpio_pin] = name
+    def __setitem__(self, gpio_channel, name):
+        if isinstance(gpio_channel, int) and gpio_channel in self.callback:
+            self.gpio_name_pair[gpio_channel] = name
             self._register_gpio(self.gpio_name_pair)
 
-    def __delitem__(self, gpio_pin):
-        if isinstance(gpio_pin, int) and self.gpio_name_pair.get(gpio_pin):
-            self.gpio_name_pair[gpio_pin] = ""
+    def __delitem__(self, gpio_channel):
+        if isinstance(gpio_channel, int) and self.gpio_name_pair.get(gpio_channel):
+            self.gpio_name_pair[gpio_channel] = ""
             self._register_gpio(self.gpio_name_pair)
+            self.cleanup(gpio_channel)
 
-    def __getitem__(self, gpio_pin):
-        return self.gpio_name_pair.get(gpio_pin)
+    def __getitem__(self, gpio_channel):
+        return self.gpio_name_pair.get(gpio_channel)
+
+    @staticmethod
+    def cleanup(channel=None):
+        """ Clean all GPIO channels used in program instance
+        if channel not specified. Otherwise, clean provided
+        GPIO channel. """
+        GPIO.cleanup(channel)
 
     def setup(self):
+        """ Setup function to register GPIO channels, add event
+        detect to those channels, and assign them to appropriate
+        callback functions. """
         self._setup_gpio_in()
         self._add_event_detect()
         self._add_event_callback()
 
     def _setup_gpio_in(self):
-        for gpio_pin in self.registered_gpio:
-            GPIO.setup(gpio_pin, GPIO.IN)
+        """ Set up GPIO IN for channels registered in the class
+        instance. """
+        for gpio_channel in self.registered_gpio:
+            GPIO.setup(gpio_channel, GPIO.IN)
 
     def _add_event_detect(self):
-        for gpio_pin in self.registered_gpio:
-            GPIO.add_event_detect(gpio_pin, GPIO.BOTH, bouncetime=300)
+        """ Called after self._setup_gpio_in. Add event detect for
+        channels registered in the class instance. """
+        for gpio_channel in self.registered_gpio:
+            GPIO.add_event_detect(gpio_channel, GPIO.BOTH, bouncetime=300)
 
     def _add_event_callback(self):
-        for gpio_pin in self.registered_gpio:
-            GPIO.add_event_callback(gpio_pin, self.callback[gpio_pin])
+        """ Called after self._add_event_detect. Apply event callback for
+        channels registered in the class instance. Each callback is unique
+        to the GPIO channel. """
+        for gpio_channel in self.registered_gpio:
+            GPIO.add_event_callback(gpio_channel, self.callback[gpio_channel])
 
     def _register_gpio(self, gpio_map):
-        for gpio_pin in gpio_map:
-            if gpio_pin not in self.gpio_name_pair:
+        """ Set instance variable self.registered_gpio, a dictionary of 
+        occupied GPIO channels with (e.g. plant) name. """
+        for gpio_channel in gpio_map:
+            if gpio_channel not in self.gpio_name_pair:
                 raise KeyError(
-                    f"{gpio_pin} is not a valid GPIO pin in Raspberry Pi model {self.pi_model}."
+                    f"{gpio_channel} is not a valid GPIO channel in Raspberry Pi model {self.pi_model}."
                 )
-            self.gpio_name_pair[gpio_pin] = gpio_map[gpio_pin]
+            self.gpio_name_pair[gpio_channel] = gpio_map[gpio_channel]
 
         self.registered_gpio = [
             gpio for gpio, name in self.gpio_name_pair.items() if name
