@@ -6,11 +6,11 @@ plant_map = {
     16: "Golden Pothos",
     19: "Prls/Jade Pothos",
     20: "Calathea Mdln",
-    21: "Chns Money Plant",
+    21: "Micans Pothos",
 }
 my_plants = Soil(plant_map)
 # an example of adding a gpio channel with a plant name
-my_plants[26] = "Micans Pothos"
+my_plants[26] = "Chns Money Plant"
 my_plants.setup()
 
 # if you want to add callback, i.e. detect change in moisture, call...
