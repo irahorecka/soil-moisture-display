@@ -82,22 +82,22 @@ class LCD:
         for i in range(self.LCD_WIDTH):
             self._lcd_byte(ord(message[i]), self.LCD_CHR)
 
-    def welcome(self, line_1_16char, line_2_16char):
+    def welcome(self, line_1_16char, line_2_16char, duration=5):
         """ Welcome LCD screen display message upon boot. """
         try:
             self.__init__()
             self._lcd_string(line_1_16char, self.LCD_LINE_1)
             self._lcd_string(line_2_16char, self.LCD_LINE_2)
-            time.sleep(4)
+            time.sleep(duration)
         finally:
             self._lcd_blank()
 
-    def display(self, line_1_16char, line_2_16char):
+    def display(self, line_1_16char, line_2_16char, duration=2):
         """ Display input line 1 & 2 string on LCD display. """
         self.__init__()
         try:
             self._lcd_string(line_1_16char, self.LCD_LINE_1)
             self._lcd_string(line_2_16char, self.LCD_LINE_2)
-            time.sleep(2)
+            time.sleep(duration)
         finally:
             self._lcd_blank()

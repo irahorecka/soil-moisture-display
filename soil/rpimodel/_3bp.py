@@ -13,9 +13,9 @@ import RPi.GPIO as GPIO
 
 class RPi_3BP:
     pi_model = "3B+"
+    welcome("Let's detect", "soil moisture!")
 
     def __init__(self):
-        welcome("Let's detect", "soil moisture!")
         self.gpio_name_pair = {
             4: "",
             5: "",

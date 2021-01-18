@@ -36,12 +36,13 @@ class Soil(RPi_3BP):
     def __getitem__(self, gpio_channel):
         return self.gpio_name_pair.get(gpio_channel)
 
-    @staticmethod
-    def cleanup(channel=None):
+    def cleanup(self, channel=None):
         """ Clean all GPIO channels used in program instance
         if channel not specified. Otherwise, clean provided
         GPIO channel. """
-        GPIO.cleanup(channel)
+        if not channel:
+            for gpio_channel in self.registered_gpio:
+                GPIO.cleanup(gpio_channel)
 
     def setup(self):
         """ Setup function to register GPIO channels, add event
@@ -79,9 +80,7 @@ class Soil(RPi_3BP):
                     f"{gpio_channel} is not a valid GPIO channel in Raspberry Pi model {self.pi_model}."
                 )
             if len(name) > 16:
-                raise ValueError(
-                    f'"{name}" has {len(name)} chars. Maximum char is 16.'
-                )
+                raise ValueError(f'"{name}" has {len(name)} chars. Maximum char is 16.')
             self.gpio_name_pair[gpio_channel] = gpio_map[gpio_channel]
 
         self.registered_gpio = [
