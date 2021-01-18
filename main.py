@@ -1,5 +1,4 @@
 from soil import Soil
-import time
 
 # gpio channel: plant name
 plant_map = {
@@ -13,8 +12,8 @@ my_plants = Soil(plant_map)
 my_plants[26] = "Velvet plant"
 my_plants.setup()
 
-while True:
-    try:
-        time.sleep(1)
-    finally:
-        my_plants.cleanup()
+try:
+    while True:
+        pass
+except KeyboardInterrupt:
+    my_plants.cleanup()

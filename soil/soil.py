@@ -1,11 +1,14 @@
 from .rpimodel import RPi_3BP
 import platform
+import sys
 
 # for development purposes (I always use MacOS)
 if platform.system() == "Darwin":
-    import FakeRPi.GPIO as GPIO
-else:
-    import RPi.GPIO as GPIO
+    import fake_rpi
+
+    sys.modules["RPi"] = fake_rpi.RPi
+    sys.modules["RPi.GPIO"] = fake_rpi.RPi.GPIO
+import RPi.GPIO as GPIO
 
 
 class Soil(RPi_3BP):

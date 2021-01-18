@@ -1,16 +1,21 @@
 import platform
+import sys
+from .lcd import welcome, display
 
 # for development purposes (I always use MacOS)
 if platform.system() == "Darwin":
-    import FakeRPi.GPIO as GPIO
-else:
-    import RPi.GPIO as GPIO
+    import fake_rpi
+
+    sys.modules["RPi"] = fake_rpi.RPi
+    sys.modules["RPi.GPIO"] = fake_rpi.RPi.GPIO
+import RPi.GPIO as GPIO
 
 
 class RPi_3BP:
     pi_model = "3B+"
 
     def __init__(self):
+        welcome("Let's detect", "soil moisture!")
         self.gpio_name_pair = {
             4: "",
             5: "",
@@ -51,56 +56,56 @@ class RPi_3BP:
         }
 
     def _callback_4(self, channel):
-        self._print_message(channel, 4)
+        self._print_message(channel)
 
     def _callback_5(self, channel):
-        self._print_message(channel, 5)
+        self._print_message(channel)
 
     def _callback_6(self, channel):
-        self._print_message(channel, 6)
+        self._print_message(channel)
 
     def _callback_12(self, channel):
-        self._print_message(channel, 12)
+        self._print_message(channel)
 
     def _callback_13(self, channel):
-        self._print_message(channel, 13)
+        self._print_message(channel)
 
     def _callback_16(self, channel):
-        self._print_message(channel, 16)
+        self._print_message(channel)
 
     def _callback_17(self, channel):
-        self._print_message(channel, 17)
+        self._print_message(channel)
 
     def _callback_18(self, channel):
-        self._print_message(channel, 18)
+        self._print_message(channel)
 
     def _callback_19(self, channel):
-        self._print_message(channel, 19)
+        self._print_message(channel)
 
     def _callback_20(self, channel):
-        self._print_message(channel, 20)
+        self._print_message(channel)
 
     def _callback_21(self, channel):
-        self._print_message(channel, 21)
+        self._print_message(channel)
 
     def _callback_22(self, channel):
-        self._print_message(channel, 22)
+        self._print_message(channel)
 
     def _callback_23(self, channel):
-        self._print_message(channel, 23)
+        self._print_message(channel)
 
     def _callback_24(self, channel):
-        self._print_message(channel, 24)
+        self._print_message(channel)
 
     def _callback_25(self, channel):
-        self._print_message(channel, 25)
+        self._print_message(channel)
 
     def _callback_26(self, channel):
-        self._print_message(channel, 26)
+        self._print_message(channel)
 
     def _callback_27(self, channel):
-        self._print_message(channel, 27)
+        self._print_message(channel)
 
-    def _print_message(self, channel, gpio_pin):
+    def _print_message(self, channel):
         if GPIO.input(channel) or not GPIO.input(channel):
-            print(f"{self.gpio_name_pair[gpio_pin]} is watered.")
+            display(self.gpio_name_pair[channel], "is watered.")
