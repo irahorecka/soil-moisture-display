@@ -22,7 +22,7 @@ if __name__ == "__main__":
             led.on(channel=4)
             my_plants.read_input()
             led.off(channel=4)
-            # wait 9 seconds before re-reading input
-            time.sleep(9)
+            # wait 59 seconds before re-reading input (~ 1 min)
+            time.sleep(59)
     except KeyboardInterrupt:
         my_plants.cleanup()
