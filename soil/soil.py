@@ -18,6 +18,7 @@ class Soil(RPi_3BP):
 
     def __init__(self, gpio_map):
         GPIO.setmode(GPIO.BCM)
+        GPIO.setwarnings(False)
         super().__init__()
         if not isinstance(gpio_map, dict):
             raise TypeError("Expected <dict> argument.")
