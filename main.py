@@ -1,4 +1,4 @@
-from soil import Soil
+from soil import Soil, led
 import time
 
 # gpio channel: plant name
@@ -19,7 +19,9 @@ my_plants.setup()
 if __name__ == "__main__":
     try:
         while True:
+            led.on(channel=4)
             my_plants.read_input()
+            led.off(channel=4)
             # wait 9 seconds before re-reading input
             time.sleep(9)
     except KeyboardInterrupt:
