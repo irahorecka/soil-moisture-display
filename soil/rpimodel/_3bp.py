@@ -107,5 +107,7 @@ class RPi_3BP:
         self._print_message(channel)
 
     def _print_message(self, channel):
-        if GPIO.input(channel) or not GPIO.input(channel):
+        if GPIO.input(channel) == GPIO.HIGH:
+            display(self.gpio_name_pair[channel], "is not watered.")
+        else:
             display(self.gpio_name_pair[channel], "is watered.")

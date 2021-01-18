@@ -73,10 +73,14 @@ class Soil(RPi_3BP):
     def _register_gpio(self, gpio_map):
         """ Set instance variable self.registered_gpio, a dictionary of 
         occupied GPIO channels with (e.g. plant) name. """
-        for gpio_channel in gpio_map:
+        for gpio_channel, name in gpio_map.items():
             if gpio_channel not in self.gpio_name_pair:
                 raise KeyError(
                     f"{gpio_channel} is not a valid GPIO channel in Raspberry Pi model {self.pi_model}."
+                )
+            if len(name) > 16:
+                raise ValueError(
+                    f'"{name}" has {len(name)} chars. Maximum char is 16.'
                 )
             self.gpio_name_pair[gpio_channel] = gpio_map[gpio_channel]
 
