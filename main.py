@@ -1,4 +1,4 @@
-from soil import Soil, led
+from soil import Soil, led, lcd
 import time
 
 # gpio channel: plant name
@@ -18,6 +18,7 @@ my_plants.setup()
 
 if __name__ == "__main__":
     try:
+        lcd.welcome("Let's detect", "soil moisture!")
         while True:
             led.on(channel=4)
             my_plants.read_input()

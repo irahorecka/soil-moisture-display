@@ -13,7 +13,6 @@ import RPi.GPIO as GPIO
 
 class RPi_3BP:
     pi_model = "3B+"
-    welcome("Let's detect", "soil moisture!")
 
     def __init__(self):
         self.gpio_name_pair = {
@@ -56,57 +55,58 @@ class RPi_3BP:
         }
 
     def _callback_4(self, channel):
-        self.print_message(channel)
+        self.lcd_message(channel)
 
     def _callback_5(self, channel):
-        self.print_message(channel)
+        self.lcd_message(channel)
 
     def _callback_6(self, channel):
-        self.print_message(channel)
+        self.lcd_message(channel)
 
     def _callback_12(self, channel):
-        self.print_message(channel)
+        self.lcd_message(channel)
 
     def _callback_13(self, channel):
-        self.print_message(channel)
+        self.lcd_message(channel)
 
     def _callback_16(self, channel):
-        self.print_message(channel)
+        self.lcd_message(channel)
 
     def _callback_17(self, channel):
-        self.print_message(channel)
+        self.lcd_message(channel)
 
     def _callback_18(self, channel):
-        self.print_message(channel)
+        self.lcd_message(channel)
 
     def _callback_19(self, channel):
-        self.print_message(channel)
+        self.lcd_message(channel)
 
     def _callback_20(self, channel):
-        self.print_message(channel)
+        self.lcd_message(channel)
 
     def _callback_21(self, channel):
-        self.print_message(channel)
+        self.lcd_message(channel)
 
     def _callback_22(self, channel):
-        self.print_message(channel)
+        self.lcd_message(channel)
 
     def _callback_23(self, channel):
-        self.print_message(channel)
+        self.lcd_message(channel)
 
     def _callback_24(self, channel):
-        self.print_message(channel)
+        self.lcd_message(channel)
 
     def _callback_25(self, channel):
-        self.print_message(channel)
+        self.lcd_message(channel)
 
     def _callback_26(self, channel):
-        self.print_message(channel)
+        self.lcd_message(channel)
 
     def _callback_27(self, channel):
-        self.print_message(channel)
+        self.lcd_message(channel)
 
-    def print_message(self, channel):
+    def lcd_message(self, channel):
+        # hmmm... can we abstract `display`?
         if GPIO.input(channel) == GPIO.HIGH:
             display(self.gpio_name_pair[channel], "needs water.")
         else:

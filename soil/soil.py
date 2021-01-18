@@ -58,7 +58,7 @@ class Soil(RPi_3BP):
 
     def read_input(self):
         for gpio_channel in self.registered_gpio:
-            self.print_message(gpio_channel)
+            self.lcd_message(gpio_channel)
             time.sleep(1)
 
     def _setup_gpio_in(self):
