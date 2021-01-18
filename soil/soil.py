@@ -1,6 +1,7 @@
 from .rpimodel import RPi_3BP
 import platform
 import sys
+import time
 
 # for development purposes (I always use MacOS)
 if platform.system() == "Darwin":
@@ -45,12 +46,19 @@ class Soil(RPi_3BP):
                 GPIO.cleanup(gpio_channel)
 
     def setup(self):
-        """ Setup function to register GPIO channels, add event
-        detect to those channels, and assign them to appropriate
-        callback functions. """
+        """ Setup function to register GPIO input channels. """
         self._setup_gpio_in()
+
+    def read_callback(self):
+        """ Start GPIO callbacks. Add event detect to registered
+        channels and assign channels to designated callback functions. """
         self._add_event_detect()
         self._add_event_callback()
+
+    def read_gpio_input(self):
+        for gpio_channel in self.registered_gpio:
+            self.print_message(gpio_channel)
+            time.sleep(1)
 
     def _setup_gpio_in(self):
         """ Set up GPIO IN for channels registered in the class
