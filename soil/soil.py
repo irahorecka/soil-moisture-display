@@ -49,13 +49,13 @@ class Soil(RPi_3BP):
         """ Setup function to register GPIO input channels. """
         self._setup_gpio_in()
 
-    def read_callback(self):
+    def start_callback(self):
         """ Start GPIO callbacks. Add event detect to registered
         channels and assign channels to designated callback functions. """
         self._add_event_detect()
         self._add_event_callback()
 
-    def read_gpio_input(self):
+    def read_input(self):
         for gpio_channel in self.registered_gpio:
             self.print_message(gpio_channel)
             time.sleep(1)
