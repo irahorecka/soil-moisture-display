@@ -113,4 +113,4 @@ class RPi_3BP:
 
     @staticmethod
     def _is_moist(channel):
-        return bool(GPIO.input(channel) == GPIO.HIGH)
+        return bool(GPIO.input(channel) == GPIO.LOW)
