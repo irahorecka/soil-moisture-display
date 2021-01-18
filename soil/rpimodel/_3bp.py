@@ -1,6 +1,6 @@
 import platform
 import sys
-from .lcd import welcome, display
+from . import lcd
 
 # for development purposes (I always use MacOS)
 if platform.system() == "Darwin":
@@ -106,8 +106,11 @@ class RPi_3BP:
         self.lcd_message(channel)
 
     def lcd_message(self, channel):
-        # hmmm... can we abstract `display`?
-        if GPIO.input(channel) == GPIO.HIGH:
-            display(self.gpio_name_pair[channel], "needs water.")
+        if self._is_moist(channel):
+            lcd.display(self.gpio_name_pair[channel], "is watered.")
         else:
-            display(self.gpio_name_pair[channel], "is watered.")
+            lcd.display(self.gpio_name_pair[channel], "needs water.")
+
+    @staticmethod
+    def _is_moist(channel):
+        return bool(GPIO.input(channel) == GPIO.HIGH)

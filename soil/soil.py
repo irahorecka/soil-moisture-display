@@ -43,20 +43,25 @@ class Soil(RPi_3BP):
         if channel not specified. Otherwise, clean provided
         GPIO channel. """
         if not channel:
-            for gpio_channel in self.registered_gpio:
-                GPIO.cleanup(gpio_channel)
+            for channel in self.registered_gpio:
+                GPIO.cleanup(channel)
+        else:
+            if not isinstance(channel, int):
+                raise ValueError("GPIO channel must be of type <int>.")
+            GPIO.cleanup(channel)
 
-    def setup(self):
-        """ Setup function to register GPIO input channels. """
+    def setup(self, callback=False):
+        """ Setup function to register GPIO input channels with option
+        to add event callbacks. """
         self._setup_gpio_in()
+        if callback:
+            self._add_event_detect()
+            self._add_event_callback()
 
-    def start_callback(self):
-        """ Start GPIO callbacks. Add event detect to registered
-        channels and assign channels to designated callback functions. """
-        self._add_event_detect()
-        self._add_event_callback()
-
-    def read_input(self):
+    def readout_input(self):
+        """ Read from registered GPIO input channels. """
+        # TODO: read input and display must be separated...
+        # see if you can accomplish this with callback nuance.
         for gpio_channel in self.registered_gpio:
             self.lcd_message(gpio_channel)
             time.sleep(1)
@@ -78,7 +83,7 @@ class Soil(RPi_3BP):
         channels registered in the class instance. Each callback is unique
         to the GPIO channel. """
         for gpio_channel in self.registered_gpio:
-            GPIO.add_event_callback(gpio_channel, self.callback[gpio_channel])
+            print(GPIO.add_event_callback(gpio_channel, self.callback[gpio_channel]))
 
     def _register_gpio(self, gpio_map):
         """ Set instance variable self.registered_gpio, a dictionary of 

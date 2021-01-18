@@ -11,17 +11,15 @@ plant_map = {
 my_plants = Soil(plant_map)
 # an example of adding a gpio channel with a plant name
 my_plants[26] = "Chns Money Plant"
-my_plants.setup()
-
-# if you want to add callback, i.e. detect change in moisture, call...
-# my_plants.start_callback()
+# set callback=True to detect real-time changes in moisture
+my_plants.setup(callback=False)
 
 if __name__ == "__main__":
     try:
-        lcd.welcome("Let's detect", "soil moisture!")
+        lcd.display("Let's detect", "soil moisture!")
         while True:
             led.on(channel=4)
-            my_plants.read_input()
+            my_plants.readout_input()
             led.off(channel=4)
             # wait 59 seconds before re-reading input (~ 1 min)
             time.sleep(59)
