@@ -114,12 +114,9 @@ class LCD:
             "11": "Nov",
             "12": "Dec",
         }
-        try:
-            current_time = datetime.datetime.now()
-            current_month = month[current_time.strftime("%m")]
-            self._lcd_string(current_time.strftime("%I:%M:%S %p"), self.LCD_LINE_1)
-            self._lcd_string(
-                current_time.strftime(f"{current_month} %d, %Y"), self.LCD_LINE_2
-            )
-        finally:
-            self._lcd_blank()
+        current_time = datetime.datetime.now()
+        current_month = month[current_time.strftime("%m")]
+        self._lcd_string(current_time.strftime("%I:%M:%S %p"), self.LCD_LINE_1)
+        self._lcd_string(
+            current_time.strftime(f"{current_month} %d, %Y"), self.LCD_LINE_2
+        )
