@@ -88,6 +88,7 @@ class Soil(RPi_3BP):
         to the GPIO channel. """
         for gpio_channel in self.registered_gpio:
             # build tuple arg to specify GPIO channel and mode of display
+            # TODO: is it possible to add **kwargs GPIO.add_event_callback
             callback_arg = (
                 gpio_channel,
                 self.display_medium,
