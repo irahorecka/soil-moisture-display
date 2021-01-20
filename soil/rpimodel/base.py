@@ -23,10 +23,7 @@ class BaseRPi:
         self.display_medium = ""
 
     def display_moisture(self, channel, **kwargs):
-        """ Display moisture readout on different media. """
-        # Unpack *arg, must be only GPIO channel, display medium, and
-        # moisture bool. The reason for *arg unpacking is due to the higher-order
-        # property of GPIO.add_event_callback
+        """ Display moisture readout on instance display medium. """
         if self.display_medium == "lcd":
             lcd.display(
                 self.gpio_name_pair[channel], "is watered.", **kwargs
