@@ -1,5 +1,7 @@
 from soil import Soil, led, lcd
 import datetime
+import time
+from pytz import timezone
 
 # gpio channel: plant name
 plant_map = {
@@ -24,6 +26,7 @@ if __name__ == "__main__":
             # display current time and date during 2 min interim
             datetime_interim = datetime.datetime.now() + datetime.timedelta(0, 120)
             while datetime.datetime.now() < datetime_interim:
-                lcd.display_datetime()
+                lcd.display_datetime("US/Pacific")
+                time.sleep(0.1)
     except KeyboardInterrupt:
         my_plants.cleanup()

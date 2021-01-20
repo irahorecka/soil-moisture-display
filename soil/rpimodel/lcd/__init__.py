@@ -7,5 +7,5 @@ def display(*args, **kwargs):
     lcd.display(*args, **kwargs)
 
 
-def display_datetime():
-    lcd.display_datetime()
+def display_datetime(*args, **kwargs):
+    lcd.display_datetime(*args, **kwargs)

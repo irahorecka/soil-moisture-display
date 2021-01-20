@@ -98,7 +98,7 @@ class LCD:
         finally:
             self._lcd_blank()
 
-    def display_datetime(self):
+    def display_datetime(self, timezone):
         """ Display current time and date onto LCD display. """
         month = {
             "01": "Jan",
@@ -114,7 +114,7 @@ class LCD:
             "11": "Nov",
             "12": "Dec",
         }
-        current_time = datetime.datetime.now()
+        current_time = timezone(timezone).localize(datetime.datetime.now())
         current_month = month[current_time.strftime("%m")]
         self._lcd_string(current_time.strftime("%I:%M:%S %p"), self.LCD_LINE_1)
         self._lcd_string(
