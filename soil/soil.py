@@ -55,7 +55,7 @@ class Soil(RPi_3BP):
             )
 
     def _setup_gpio_in(self):
-        """ Set up GPIO IN for channels registered in the class
+        """ Set up GPIO.IN (mode="in") for channels registered in the class
         instance. """
         for gpio_channel in self.registered_gpio:
             self.gpio_setup(gpio_channel, mode="in")
