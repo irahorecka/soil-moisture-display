@@ -45,53 +45,53 @@ class RPi_3BP(BaseRPi):
             27: self._callback_27,
         }
 
-    def _callback_4(self, *args):
-        self.display_moisture(*args)
+    def _callback_4(self, channel):
+        self.display_moisture(channel, duration=3)
 
-    def _callback_5(self, *args):
-        self.display_moisture(*args)
+    def _callback_5(self, channel):
+        self.display_moisture(channel, duration=3)
 
-    def _callback_6(self, *args):
-        self.display_moisture(*args)
+    def _callback_6(self, channel):
+        self.display_moisture(channel, duration=3)
 
-    def _callback_12(self, *args):
-        self.display_moisture(*args)
+    def _callback_12(self, channel):
+        self.display_moisture(channel, duration=3)
 
-    def _callback_13(self, *args):
-        self.display_moisture(*args)
+    def _callback_13(self, channel):
+        self.display_moisture(channel, duration=3)
 
-    def _callback_16(self, *args):
-        self.display_moisture(*args)
+    def _callback_16(self, channel):
+        self.display_moisture(channel, duration=3)
 
-    def _callback_17(self, *args):
-        self.display_moisture(*args)
+    def _callback_17(self, channel):
+        self.display_moisture(channel, duration=3)
 
-    def _callback_18(self, *args):
-        self.display_moisture(*args)
+    def _callback_18(self, channel):
+        self.display_moisture(channel, duration=3)
 
-    def _callback_19(self, *args):
-        self.display_moisture(*args)
+    def _callback_19(self, channel):
+        self.display_moisture(channel, duration=3)
 
-    def _callback_20(self, *args):
-        self.display_moisture(*args)
+    def _callback_20(self, channel):
+        self.display_moisture(channel, duration=3)
 
-    def _callback_21(self, *args):
-        self.display_moisture(*args)
+    def _callback_21(self, channel):
+        self.display_moisture(channel, duration=3)
 
-    def _callback_22(self, *args):
-        self.display_moisture(*args)
+    def _callback_22(self, channel):
+        self.display_moisture(channel, duration=3)
 
-    def _callback_23(self, *args):
-        self.display_moisture(*args)
+    def _callback_23(self, channel):
+        self.display_moisture(channel, duration=3)
 
-    def _callback_24(self, *args):
-        self.display_moisture(*args)
+    def _callback_24(self, channel):
+        self.display_moisture(channel, duration=3)
 
-    def _callback_25(self, *args):
-        self.display_moisture(*args)
+    def _callback_25(self, channel):
+        self.display_moisture(channel, duration=3)
 
-    def _callback_26(self, *args):
-        self.display_moisture(*args)
+    def _callback_26(self, channel):
+        self.display_moisture(channel, duration=3)
 
-    def _callback_27(self, *args):
-        self.display_moisture(*args)
+    def _callback_27(self, channel):
+        self.display_moisture(channel, duration=3)
