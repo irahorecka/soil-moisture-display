@@ -22,10 +22,13 @@ if __name__ == "__main__":
             led.on(channel=4)
             my_plants.readout_moisture()
             led.off(channel=4)
+
             # display current time and date during 2 min interim
             datetime_interim = datetime.datetime.now() + datetime.timedelta(0, 120)
             while datetime.datetime.now() < datetime_interim:
                 lcd.display_datetime("US/Pacific")
+                # add slight latency - we don't need to display datetime every chance we can get
                 time.sleep(0.1)
+
     except KeyboardInterrupt:
         my_plants.cleanup()
