@@ -1,7 +1,6 @@
 from soil import Soil, led, lcd
 import datetime
 import time
-from pytz import timezone
 
 # gpio channel: plant name
 plant_map = {
