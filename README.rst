@@ -1,22 +1,15 @@
 SoilMoistureDisplay
 ======================
 
-A Raspberry Pi project to detect and display my plants' soil moisture. My project is configured for the Raspberry Pi 3B+ using Python 3.7.3.
-
-.. image:: https://i.imgur.com/oF2Dy9f.jpg
-  :width: 400
-  :align: center
-  :alt: Bare minimum setup
+A Raspberry Pi project to detect and display my plants' soil moisture (`image <https://i.imgur.com/oF2Dy9f.jpg>`__). My project is configured for the Raspberry Pi 3B+ using Python 3.7.3.
 
 Running the application
 -----------------------
 It's as simple as cloning this repository and running:
 
-::
+.. code::
 
     pip3 install -r requirements.txt
-
-:: 
 
     python3 main.py
 
