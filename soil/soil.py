@@ -25,7 +25,7 @@ class Soil(RPi_3BP):
         self._register_gpio(gpio_map)
 
     def __setitem__(self, gpio_channel, name):
-        if isinstance(gpio_channel, int) and gpio_channel in self.callback:
+        if isinstance(gpio_channel, int) and gpio_channel in self.callback_method:
             self.gpio_name_pair[gpio_channel] = name
             self._register_gpio(self.gpio_name_pair)
 
@@ -50,20 +50,21 @@ class Soil(RPi_3BP):
                 raise ValueError("GPIO channel must be of type <int>.")
             GPIO.cleanup(channel)
 
-    def setup(self, callback=False):
+    def setup(self, callback=False, display="lcd"):
         """ Setup function to register GPIO input channels with option
         to add event callbacks. """
+        self.display_medium = display
         self._setup_gpio_in()
         if callback:
             self._add_event_detect()
             self._add_event_callback()
 
-    def readout_input(self):
-        """ Read from registered GPIO input channels. """
-        # TODO: read input and display must be separated...
-        # see if you can accomplish this with callback nuance.
+    def readout_moisture(self):
+        """ Read moisture in real-time from registered GPIO input channels. """
         for gpio_channel in self.registered_gpio:
-            self.lcd_message(gpio_channel)
+            self.display_moisture(
+                gpio_channel, self.display_medium, self._is_moist(gpio_channel)
+            )
             time.sleep(1)
 
     def _setup_gpio_in(self):
@@ -83,7 +84,13 @@ class Soil(RPi_3BP):
         channels registered in the class instance. Each callback is unique
         to the GPIO channel. """
         for gpio_channel in self.registered_gpio:
-            print(GPIO.add_event_callback(gpio_channel, self.callback[gpio_channel]))
+            # build tuple arg to specify GPIO channel and mode of display
+            callback_arg = (
+                gpio_channel,
+                self.display_medium,
+                self._is_moist(gpio_channel),
+            )
+            GPIO.add_event_callback(callback_arg, self.callback_method[gpio_channel])
 
     def _register_gpio(self, gpio_map):
         """ Set instance variable self.registered_gpio, a dictionary of 
@@ -100,3 +107,7 @@ class Soil(RPi_3BP):
         self.registered_gpio = [
             gpio for gpio, name in self.gpio_name_pair.items() if name
         ]
+
+    @staticmethod
+    def _is_moist(gpio_channel):
+        return bool(GPIO.input(gpio_channel) == GPIO.LOW)

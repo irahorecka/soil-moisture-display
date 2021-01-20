@@ -12,7 +12,7 @@ import smbus
 
 class LCD:
     """
-    A class to handle LCD display
+    A class to handle 16x2 I2C LCD display
     sequences upon instantiation.
     """
 
@@ -82,12 +82,17 @@ class LCD:
         for i in range(self.LCD_WIDTH):
             self._lcd_byte(ord(message[i]), self.LCD_CHR)
 
-    def display(self, line_1_16char, line_2_16char, duration=2):
+    def display(self, line1, line2, duration=2):
         """ Display input line 1 & 2 string onto LCD display. """
         try:
             self.__init__()
-            self._lcd_string(line_1_16char, self.LCD_LINE_1)
-            self._lcd_string(line_2_16char, self.LCD_LINE_2)
+            for line in (line1, line2):
+                if len(line) > 16:
+                    raise ValueError(
+                        f'"{line}" has {len(line)} chars. Maximum char is 16.'
+                    )
+            self._lcd_string(line1, self.LCD_LINE_1)
+            self._lcd_string(line2, self.LCD_LINE_2)
             time.sleep(duration)
         finally:
             self._lcd_blank()

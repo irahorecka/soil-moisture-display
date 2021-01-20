@@ -1,20 +1,11 @@
-import platform
-import sys
 from . import lcd
-
-# for development purposes (I always use MacOS)
-if platform.system() == "Darwin":
-    import fake_rpi
-
-    sys.modules["RPi"] = fake_rpi.RPi
-    sys.modules["RPi.GPIO"] = fake_rpi.RPi.GPIO
-import RPi.GPIO as GPIO
 
 
 class RPi_3BP:
     pi_model = "3B+"
 
     def __init__(self):
+        super().__init__()
         self.gpio_name_pair = {
             4: "",
             5: "",
@@ -34,7 +25,7 @@ class RPi_3BP:
             26: "",
             27: "",
         }
-        self.callback = {
+        self.callback_method = {
             4: self._callback_4,
             5: self._callback_5,
             6: self._callback_6,
@@ -54,63 +45,64 @@ class RPi_3BP:
             27: self._callback_27,
         }
 
-    def _callback_4(self, channel):
-        self.lcd_message(channel)
+    def display_moisture(self, *args):
+        """ Display moisture readout on different media. """
+        # Unpack *arg, must be only GPIO channel, display medium, and
+        # moisture bool. The reason for *arg unpacking is due to the higher-order
+        # property of GPIO.add_event_callback
+        channel, display_medium, is_moist = args
+        if display_medium == "lcd":
+            lcd.display(
+                self.gpio_name_pair[channel], "is watered."
+            ) if is_moist else lcd.display(self.gpio_name_pair[channel], "needs water.")
 
-    def _callback_5(self, channel):
-        self.lcd_message(channel)
+    def _callback_4(self, *args):
+        self.display_moisture(*args)
 
-    def _callback_6(self, channel):
-        self.lcd_message(channel)
+    def _callback_5(self, *args):
+        self.display_moisture(*args)
 
-    def _callback_12(self, channel):
-        self.lcd_message(channel)
+    def _callback_6(self, *args):
+        self.display_moisture(*args)
 
-    def _callback_13(self, channel):
-        self.lcd_message(channel)
+    def _callback_12(self, *args):
+        self.display_moisture(*args)
 
-    def _callback_16(self, channel):
-        self.lcd_message(channel)
+    def _callback_13(self, *args):
+        self.display_moisture(*args)
 
-    def _callback_17(self, channel):
-        self.lcd_message(channel)
+    def _callback_16(self, *args):
+        self.display_moisture(*args)
 
-    def _callback_18(self, channel):
-        self.lcd_message(channel)
+    def _callback_17(self, *args):
+        self.display_moisture(*args)
 
-    def _callback_19(self, channel):
-        self.lcd_message(channel)
+    def _callback_18(self, *args):
+        self.display_moisture(*args)
 
-    def _callback_20(self, channel):
-        self.lcd_message(channel)
+    def _callback_19(self, *args):
+        self.display_moisture(*args)
 
-    def _callback_21(self, channel):
-        self.lcd_message(channel)
+    def _callback_20(self, *args):
+        self.display_moisture(*args)
 
-    def _callback_22(self, channel):
-        self.lcd_message(channel)
+    def _callback_21(self, *args):
+        self.display_moisture(*args)
 
-    def _callback_23(self, channel):
-        self.lcd_message(channel)
+    def _callback_22(self, *args):
+        self.display_moisture(*args)
 
-    def _callback_24(self, channel):
-        self.lcd_message(channel)
+    def _callback_23(self, *args):
+        self.display_moisture(*args)
 
-    def _callback_25(self, channel):
-        self.lcd_message(channel)
+    def _callback_24(self, *args):
+        self.display_moisture(*args)
 
-    def _callback_26(self, channel):
-        self.lcd_message(channel)
+    def _callback_25(self, *args):
+        self.display_moisture(*args)
 
-    def _callback_27(self, channel):
-        self.lcd_message(channel)
+    def _callback_26(self, *args):
+        self.display_moisture(*args)
 
-    def lcd_message(self, channel):
-        if self._is_moist(channel):
-            lcd.display(self.gpio_name_pair[channel], "is watered.")
-        else:
-            lcd.display(self.gpio_name_pair[channel], "needs water.")
-
-    @staticmethod
-    def _is_moist(channel):
-        return bool(GPIO.input(channel) == GPIO.LOW)
+    def _callback_27(self, *args):
+        self.display_moisture(*args)
