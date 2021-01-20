@@ -1,3 +1,4 @@
+import datetime
 import platform
 import sys
 import time
@@ -94,5 +95,31 @@ class LCD:
             self._lcd_string(line1, self.LCD_LINE_1)
             self._lcd_string(line2, self.LCD_LINE_2)
             time.sleep(duration)
+        finally:
+            self._lcd_blank()
+
+    def display_datetime(self):
+        """ Display current time and date onto LCD display. """
+        month = {
+            "01": "Jan",
+            "02": "Feb",
+            "03": "Mar",
+            "04": "Apr",
+            "05": "May",
+            "06": "Jun",
+            "07": "Jul",
+            "08": "Aug",
+            "09": "Sept",
+            "10": "Oct",
+            "11": "Nov",
+            "12": "Dec",
+        }
+        try:
+            current_time = datetime.datetime.now()
+            current_month = month[current_time.strftime("%m")]
+            self._lcd_string(current_time.strftime("%I:%M:%S %p"), self.LCD_LINE_1)
+            self._lcd_string(
+                current_time.strftime(f"{current_month} %d, %Y"), self.LCD_LINE_2
+            )
         finally:
             self._lcd_blank()

@@ -22,6 +22,9 @@ if __name__ == "__main__":
             my_plants.readout_moisture()
             led.off(channel=4)
             # wait 59 seconds before re-reading input (~ 1 min)
-            time.sleep(59)
+            # display current time and date during interim
+            for _ in range(59):
+                lcd.display_datetime()
+                time.sleep(1)
     except KeyboardInterrupt:
         my_plants.cleanup()
