@@ -84,7 +84,7 @@ class LCD:
         for i in range(self.LCD_WIDTH):
             self._lcd_byte(ord(message[i]), self.LCD_CHR)
 
-    def display(self, line1, line2, duration=2):
+    def display(self, line1, line2, duration=0):
         """ Display input line 1 & 2 string onto LCD display. """
         try:
             self.__init__()
@@ -115,9 +115,7 @@ class LCD:
             "11": "Nov",
             "12": "Dec",
         }
-        current_time = datetime.datetime.now(timezone("UTC")).astimezone(
-            timezone("US/Pacific")
-        )
+        current_time = datetime.datetime.now(timezone("UTC")).astimezone(timezone(tz))
         current_month = month[current_time.strftime("%m")]
         self._lcd_string(current_time.strftime("%I:%M:%S %p"), self.LCD_LINE_1)
         self._lcd_string(

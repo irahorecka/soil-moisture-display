@@ -1,7 +1,7 @@
-from . import lcd
+from .base import BaseRPi
 
 
-class RPi_3BP:
+class RPi_3BP(BaseRPi):
     pi_model = "3B+"
 
     def __init__(self):
@@ -44,17 +44,6 @@ class RPi_3BP:
             26: self._callback_26,
             27: self._callback_27,
         }
-
-    def display_moisture(self, *args):
-        """ Display moisture readout on different media. """
-        # Unpack *arg, must be only GPIO channel, display medium, and
-        # moisture bool. The reason for *arg unpacking is due to the higher-order
-        # property of GPIO.add_event_callback
-        channel, display_medium, is_moist = args
-        if display_medium == "lcd":
-            lcd.display(
-                self.gpio_name_pair[channel], "is watered."
-            ) if is_moist else lcd.display(self.gpio_name_pair[channel], "needs water.")
 
     def _callback_4(self, *args):
         self.display_moisture(*args)

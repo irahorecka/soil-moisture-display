@@ -16,10 +16,11 @@ my_plants.setup(callback=False, display="lcd")
 
 if __name__ == "__main__":
     try:
-        lcd.display("Let's detect", "soil moisture!")
+        # display welcome message for 5 seconds
+        lcd.display("Let's detect", "soil moisture!", duration=5)
         while True:
             led.on(channel=4)
-            my_plants.readout_moisture()
+            my_plants.readout_moisture(duration=3)
             led.off(channel=4)
 
             # display current time and date during 2 min interim

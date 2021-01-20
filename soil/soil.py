@@ -59,13 +59,16 @@ class Soil(RPi_3BP):
             self._add_event_detect()
             self._add_event_callback()
 
-    def readout_moisture(self):
-        """ Read moisture in real-time from registered GPIO input channels. """
+    def readout_moisture(self, **kwargs):
+        """ Read moisture in real-time from registered GPIO input channels
+        and display on selected medium. """
         for gpio_channel in self.registered_gpio:
             self.display_moisture(
-                gpio_channel, self.display_medium, self._is_moist(gpio_channel)
+                gpio_channel,
+                self.display_medium,
+                self._is_moist(gpio_channel),
+                **kwargs,
             )
-            time.sleep(1)
 
     def _setup_gpio_in(self):
         """ Set up GPIO IN for channels registered in the class
