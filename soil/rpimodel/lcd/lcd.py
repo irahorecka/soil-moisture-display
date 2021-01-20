@@ -115,7 +115,9 @@ class LCD:
             "11": "Nov",
             "12": "Dec",
         }
-        current_time = timezone(tz).localize(datetime.datetime.now())
+        current_time = datetime.datetime.now(timezone("UTC")).astimezone(
+            timezone("US/Pacific")
+        )
         current_month = month[current_time.strftime("%m")]
         self._lcd_string(current_time.strftime("%I:%M:%S %p"), self.LCD_LINE_1)
         self._lcd_string(
