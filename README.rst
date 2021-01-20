@@ -38,7 +38,6 @@ For example, let's set up this instance:
     }
     my_plants = Soil(plant_map)
     my_plants.setup(callback=True, display="lcd")
-    my_plants.readout_moisture()
 
     if __name__ == "__main__":
         try:
