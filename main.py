@@ -4,14 +4,13 @@ import time
 
 # gpio channel: plant name
 plant_map = {
-    16: "Golden Pothos",
     19: "Prls/Jade Pothos",
     20: "Calathea Mdln",
     21: "Micans Pothos",
 }
 my_plants = Soil(plant_map)
 # an example of adding a gpio channel with a plant name
-my_plants[26] = "Chns Money Plant"
+my_plants[26] = "Golden Pothos"
 # set callback=True to detect real-time changes in moisture
 my_plants.setup(callback=False, display="lcd")
 
