@@ -36,6 +36,7 @@ class BaseRPi:
 
     @staticmethod
     def _is_moist(gpio_channel):
+        """ Return boolean value to indicate moist soil. """
         return bool(GPIO.input(gpio_channel) == GPIO.LOW)
 
     @staticmethod
@@ -51,7 +52,8 @@ class BaseRPi:
 
     @staticmethod
     def gpio_add_event_detect(gpio_channel, **kwargs):
-        """ Provide class interface for GPIO.add_event_detect """
+        """ Provide class interface for GPIO.add_event_detect.
+        Hard code GPIO.BOTH, which is the only usecase for this project. """
         GPIO.add_event_detect(gpio_channel, GPIO.BOTH, **kwargs)
 
     def gpio_add_event_callback(self, channel):
