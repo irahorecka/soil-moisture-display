@@ -87,7 +87,6 @@ class LCD:
     def display(self, line1, line2, duration=1):
         """ Display input line 1 & 2 string onto LCD display. """
         try:
-            self.__init__()
             for line in (line1, line2):
                 if len(line) > 16:
                     raise ValueError(
