@@ -1,4 +1,4 @@
-SoilMoistureDisplay
+soil-moisture-display
 ======================
 
 A Raspberry Pi project to detect and display my plants' soil moisture (`image <https://i.imgur.com/oF2Dy9f.jpg>`__). My project is configured for the Raspberry Pi 3B+ using Python 3.7.3.
